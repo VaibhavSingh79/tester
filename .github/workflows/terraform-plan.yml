@@ -18,7 +18,10 @@ jobs:
       - uses: hashicorp/setup-terraform@v2
       - name: Terraform Init
         working-directory: ./infrastructure
-        run: terraform init
+        run: |
+          for i in 1 2 3; do
+            terraform init && break || sleep 10
+          done
       - name: Terraform Plan
         working-directory: ./infrastructure
         run: terraform plan
